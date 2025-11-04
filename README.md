@@ -5,31 +5,6 @@ Pipeline de datos en Python para procesar encuestas mensuales almacenadas en for
 Cubre todo el flujo **ingesta → limpieza/modelado → almacenamiento → reporte Markdown** siguiendo la estructura base del repositorio oficial `Proyecto_UT1_RA1_BA`.
 
 ---
-
-## ⚙️ Estructura del proyecto
-
-Proyecto_bd_ra1/
-│
-├── data/
-│ └── drops/encuestas_202511.xlsx
-│
-├── project/
-│ ├── ingest.py # Ingesta y trazabilidad
-│ ├── clean.py # Limpieza, validaciones y deduplicación
-│ ├── store.py # Guardado en SQLite y Parquet
-│ ├── report.py # Reporte Markdown e informe de calidad
-│ ├── encuestas.db # Base de datos SQLite
-│ └── output/
-│ ├── clean_encuestas.parquet
-│ ├── informe_de_calidad.xlsx
-│ └── reporte.md
-│
-├── run.py # Orquesta el pipeline completo
-├── requirements.txt # Dependencias del entorno
-└── README.md
-
-
----
 ## 🧠 Decisiones y supuestos
 Clave natural: id_respuesta.
 Se aplica política “último gana” por _ingest_ts.
