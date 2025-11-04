@@ -28,6 +28,7 @@ Proyecto_bd_ra1/
 ├── requirements.txt # Dependencias del entorno
 └── README.md
 
+
 ---
 ## 🧠 Decisiones y supuestos
 Clave natural: id_respuesta.
