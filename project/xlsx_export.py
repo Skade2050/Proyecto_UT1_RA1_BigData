@@ -1,4 +1,3 @@
-# project/xlsx_export.py
 from __future__ import annotations
 from pathlib import Path
 import pandas as pd
@@ -10,15 +9,16 @@ EXPECTED_COLS = [
 ]
 
 def _leer_csv(path: str) -> pd.DataFrame:
-    """Lee CSV con detección simple de separador."""
+    """Lee CSV con detección simple de separador. Rechaza vacíos o con <2 columnas."""
     for sep in (";", ",", "\t", "|"):
         try:
             df = pd.read_csv(path, sep=sep)
-            if df.shape[1] > 1 or df.empty:
+            # exigimos al menos 2 columnas y que no esté vacío
+            if not df.empty and df.shape[1] >= 2:
                 return df
         except Exception:
             continue
-    raise ValueError("No se pudo detectar separador. Prueba guardando como CSV con ';' o ','.")
+    raise ValueError("No se pudo detectar separador o el CSV está vacío. Guarda el CSV con ';' o ','.")
 
 def _normalizar(df: pd.DataFrame) -> pd.DataFrame:
     """Ajusta columnas, tipos y textos para el Excel del trabajo."""
@@ -29,16 +29,20 @@ def _normalizar(df: pd.DataFrame) -> pd.DataFrame:
     # Reordenar: primero las esperadas, luego las extra
     df = df[[c for c in EXPECTED_COLS if c in df.columns] + [c for c in df.columns if c not in EXPECTED_COLS]]
 
-    # Trim textos
+    # Trim textos (sin convertir NaN en "nan")
     for c in df.columns:
-        if df[c].dtype == "object":
-            df[c] = df[c].astype(str).str.strip()
+        if pd.api.types.is_object_dtype(df[c]) or pd.api.types.is_string_dtype(df[c]):
+            df[c] = df[c].astype("string")
+            df[c] = df[c].str.strip()
 
-    # fecha (day-first), id como texto, satisfaccion numérica (coma o punto)
+    # fecha (day-first), id como texto (NA preservado), satisfaccion numérica (coma o punto)
     df["fecha"] = pd.to_datetime(df["fecha"], errors="coerce", dayfirst=True)
-    df["id_respuesta"] = df["id_respuesta"].astype(str)
+
+    # preservar nulos y castear a dtype string (no a str nativo para evitar "nan")
+    df["id_respuesta"] = df["id_respuesta"].astype("string")
+
     df["satisfaccion"] = pd.to_numeric(
-        df["satisfaccion"].astype(str).str.replace(",", ".", regex=False).str.replace(" ", "", regex=False),
+        df["satisfaccion"].astype("string").str.replace(",", ".", regex=False).str.replace(" ", "", regex=False),
         errors="coerce"
     )
     return df

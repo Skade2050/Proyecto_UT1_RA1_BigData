@@ -1,4 +1,3 @@
-# project/report.py
 from __future__ import annotations
 from pathlib import Path
 import pandas as pd
@@ -12,9 +11,10 @@ def generate_report(df_clean: pd.DataFrame,
                     output_path: str = "project/output/reporte.md") -> None:
     """
     Genera reporte Markdown con:
-      - KPIs básicos
-      - Distribución de satisfacción (1–10 + NS/NC)
+      - KPIs básicos (con definiciones)
+      - Distribución de satisfacción (1–10 + NS/NC, orden correcto)
       - Evolución mensual (n° encuestas y media)
+      - Resumen de cuarentena por causa
     """
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -28,13 +28,18 @@ def generate_report(df_clean: pd.DataFrame,
     fmin = pd.to_datetime(df["fecha"]).min() if "fecha" in df.columns else None
     fmax = pd.to_datetime(df["fecha"]).max() if "fecha" in df.columns else None
 
-    # Distribución satisfacción (1..10 + NS/NC)
+    # Distribución satisfacción (1..10 + NS/NC), ordenada correctamente
+    levels = [str(i) for i in range(1, 11)] + ["NS/NC"]
+    if "satisfaccion" in df.columns:
+        dist_tmp = df["satisfaccion"].astype("Int64").astype("string").fillna("NS/NC")
+    else:
+        dist_tmp = pd.Series([], dtype="string")
+    dist = pd.DataFrame({"satisf_str": dist_tmp})
+    dist["satisf_str"] = pd.Categorical(dist["satisf_str"], categories=levels, ordered=True)
     dist = (
-        df.assign(satisf_str=df["satisfaccion"].astype("Int64").astype("string"))
-          .assign(satisf_str=lambda d: d["satisf_str"].fillna("NS/NC"))
-          .groupby("satisf_str").size().rename("n").reset_index()
-          .sort_values("satisf_str")
-    )
+        dist.groupby("satisf_str").size().rename("n").reset_index()
+        if not dist.empty else pd.DataFrame({"satisf_str": levels, "n": [0]*len(levels)})
+    ).sort_values("satisf_str")
 
     # Evolución mensual
     if "fecha" in df.columns:
@@ -43,7 +48,6 @@ def generate_report(df_clean: pd.DataFrame,
                  .agg(encuestas=("satisfaccion", "size"),
                       media_satisf=("satisfaccion", "mean"))
                  .reset_index())
-        # evitar floats feos en markdown
         evo["media_satisf"] = evo["media_satisf"].round(2)
     else:
         evo = pd.DataFrame(columns=["mes", "encuestas", "media_satisf"])
@@ -67,7 +71,16 @@ def generate_report(df_clean: pd.DataFrame,
     md.append("\n## KPIs\n")
     md.append(f"- **Encuestas (clean):** {n_total}\n")
     md.append(f"- **NS/NC:** {n_nsnc} ({p_nsnc:.1f}%)\n")
-    md.append(f"- **Media de satisfacción:** {media_sat:.2f}\n" if media_sat == media_sat else "- **Media de satisfacción:** NA\n")
+    if media_sat is not None and not pd.isna(media_sat):
+        md.append(f"- **Media de satisfacción:** {media_sat:.2f}\n")
+    else:
+        md.append("- **Media de satisfacción:** NA\n")
+
+    md.append("\n### Definiciones de KPI\n")
+    md.append("- **Encuestas (clean):** nº de filas tras reglas de calidad (fechas válidas, satisfacción 1–10, id_respuesta presente).\n")
+    md.append("- **NS/NC:** recuento de filas con `satisfaccion` nula tras mapear valores como 'no sabe/no contesta'.\n")
+    md.append("- **Media de satisfacción:** media aritmética de `satisfaccion` (1–10), excluyendo nulos.\n")
+    md.append("- **Evolución mensual:** `count` y `mean` por mes de `fecha`.\n")
 
     md.append("\n## Distribución de satisfacción (1–10 + NS/NC)\n")
     md.append(dist.to_markdown(index=False))

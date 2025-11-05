@@ -20,12 +20,22 @@
 - **Media de satisfacción:** 5.41
 
 
+### Definiciones de KPI
+
+- **Encuestas (clean):** nº de filas tras reglas de calidad (fechas válidas, satisfacción 1–10, id_respuesta presente).
+
+- **NS/NC:** recuento de filas con `satisfaccion` nula tras mapear valores como 'no sabe/no contesta'.
+
+- **Media de satisfacción:** media aritmética de `satisfaccion` (1–10), excluyendo nulos.
+
+- **Evolución mensual:** `count` y `mean` por mes de `fecha`.
+
+
 ## Distribución de satisfacción (1–10 + NS/NC)
 
 | satisf_str   |   n |
 |:-------------|----:|
 | 1            | 167 |
-| 10           | 149 |
 | 2            | 171 |
 | 3            | 180 |
 | 4            | 153 |
@@ -34,6 +44,7 @@
 | 7            | 180 |
 | 8            | 169 |
 | 9            | 150 |
+| 10           | 149 |
 | NS/NC        | 227 |
 
 
@@ -59,8 +70,8 @@
 
 ## Quarantine (resumen)
 
-| causa                            |    n |
-|:---------------------------------|-----:|
-| fecha_invalida                   | 2906 |
-| fecha_invalidasatisf_fuera_rango |  165 |
-| satisf_fuera_rango               |   91 |
+| causa                             |    n |
+|:----------------------------------|-----:|
+| fecha_invalida                    | 2906 |
+| fecha_invalida;satisf_fuera_rango |  165 |
+| satisf_fuera_rango                |   91 |
