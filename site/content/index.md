@@ -55,7 +55,7 @@ Incluye métricas clave, distribución de satisfacción, evolución mensual y co
 
 ---
 
-## 🧠 Autores y créditos
+## 🧠 Autor
 
 Proyecto académico desarrollado por  
 **Leandro Pérez Martínez** — módulo **Big Data Aplicado / UT1 – RA1 (FCT)**  

@@ -6,6 +6,12 @@
       <description>Últimas 10 notas on BDA-RA1</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>Pipeline de Encuestas</title>
+    <link>https:///proyecto_bd_ra1/</link>
+    <guid>https:///proyecto_bd_ra1/</guid>
+    <description><![CDATA[ Documentación completa del pipeline de encuestas — desde la ingesta y limpieza hasta el reporte final. ]]></description>
+    <pubDate>Sun, 09 Nov 2025 11:52:46 GMT</pubDate>
+  </item><item>
     <title>1. Ingesta y Almacenamiento</title>
     <link>https:///proyecto_bd_ra1/docs/1-ingesta-almacenamiento</link>
     <guid>https:///proyecto_bd_ra1/docs/1-ingesta-almacenamiento</guid>
@@ -22,12 +28,6 @@
     <link>https:///proyecto_bd_ra1/docs/3-modelo-reporte</link>
     <guid>https:///proyecto_bd_ra1/docs/3-modelo-reporte</guid>
     <description><![CDATA[ Transformación de datos validados en información útil mediante KPIs y reportes analíticos automáticos. ]]></description>
-    <pubDate>Sun, 09 Nov 2025 11:52:46 GMT</pubDate>
-  </item><item>
-    <title>Pipeline de Encuestas</title>
-    <link>https:///proyecto_bd_ra1/</link>
-    <guid>https:///proyecto_bd_ra1/</guid>
-    <description><![CDATA[ Documentación completa del pipeline de encuestas — desde la ingesta y limpieza hasta el reporte final. ]]></description>
     <pubDate>Sun, 09 Nov 2025 11:52:46 GMT</pubDate>
   </item><item>
     <title>Reporte UT1 · Encuestas de Satisfacción</title>
