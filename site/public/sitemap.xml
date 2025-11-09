@@ -1,16 +1,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
-    <loc>https:///proyecto_bd_ra1/docs/1-ingesta-almacenamiento</loc>
+    <loc>https:///Proyecto_UT1_RA1_BigData/docs/1-ingesta-almacenamiento</loc>
+    <lastmod>2025-11-09T16:38:57.000Z</lastmod>
+  </url><url>
+    <loc>https:///Proyecto_UT1_RA1_BigData/docs/2-limpieza-calidad</loc>
     <lastmod>2025-11-09T11:52:46.000Z</lastmod>
   </url><url>
-    <loc>https:///proyecto_bd_ra1/docs/2-limpieza-calidad</loc>
+    <loc>https:///Proyecto_UT1_RA1_BigData/docs/3-modelo-reporte</loc>
     <lastmod>2025-11-09T11:52:46.000Z</lastmod>
   </url><url>
-    <loc>https:///proyecto_bd_ra1/docs/3-modelo-reporte</loc>
-    <lastmod>2025-11-09T11:52:46.000Z</lastmod>
+    <loc>https:///Proyecto_UT1_RA1_BigData/</loc>
+    <lastmod>2025-11-09T16:38:57.000Z</lastmod>
   </url><url>
-    <loc>https:///proyecto_bd_ra1/</loc>
-    <lastmod>2025-11-09T12:27:32.000Z</lastmod>
-  </url><url>
-    <loc>https:///proyecto_bd_ra1/reportes/reporte-encuestas</loc>
+    <loc>https:///Proyecto_UT1_RA1_BigData/reportes/reporte-encuestas</loc>
     <lastmod>2025-11-09T11:52:46.000Z</lastmod>
   </url></urlset>
