@@ -29,7 +29,7 @@ Extra: informe_de_calidad.xlsx con recuento de nulos y causas de quarantine.
 
 ---
 ## 📁 Estructura del Repositorio
-
+```plaintext
 Proyecto_UT1_RA1_BigData/
 │
 ├── data/ 
@@ -59,7 +59,8 @@ Proyecto_UT1_RA1_BigData/
 │
 ├── requirements.txt
 ├── run.py 
-└── README.md 
+└── README.md
+```
 ---
 ## 📊 Salidas principales
 project/output/reporte.md – Reporte principal en Markdown.
