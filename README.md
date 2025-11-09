@@ -28,6 +28,39 @@ Reporte Markdown: incluye KPIs, distribución de satisfacción, evolución mensu
 Extra: informe_de_calidad.xlsx con recuento de nulos y causas de quarantine.
 
 ---
+## 📁 Estructura del Repositorio
+
+Proyecto_UT1_RA1_BigData/
+│
+├── data/ 
+│   └── drops/
+│       └── encuestas_2025_large.csv
+│
+├── project/ 
+│   ├── __pycache__/
+│   ├── ingest.py 
+│   ├── clean.py
+│   ├── store.py 
+│   ├── report.py
+│   ├── xlsx_export.py 
+│   ├── encuestas.db 
+│   └── output/ 
+│       ├── reporte.md 
+│       ├── informe_de_calidad.xlsx 
+│       ├── clean_encuestas.parquet
+│       └── xlsx/ 
+│           └── encuestas_2025_large.xlsx
+│
+├── site/ 
+│   ├── content/docs/
+│   ├── content/reportes/ 
+│   ├── quartz.config.ts
+│   └── ...
+│
+├── requirements.txt
+├── run.py 
+└── README.md 
+---
 ## 📊 Salidas principales
 project/output/reporte.md – Reporte principal en Markdown.
 
