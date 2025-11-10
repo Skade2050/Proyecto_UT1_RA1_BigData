@@ -93,17 +93,25 @@ Leandro Pérez Martínez
 
 ## ▶️ Cómo ejecutar
 ```bash
-# Crear y activar entorno virtual
-python -m venv venv
-# Windows
-.\venv\Scripts\activate
-# macOS/Linux
-source venv/bin/activate
-
-# Instalar dependencias
+# Clonamos el repo del proyecto
+git clone https://github.com/Skade2050/Proyecto_UT1_RA1_BigData
+# Nos metemos en el directorio donde tenemos el repo clonado
+cd .\Proyecto_UT1_RA1_BigData
+# Instalamos las bibliotecas que tenemos en el requirements.txt
 pip install -r requirements.txt
+# Ya estaria listo para ejecutar
 
-# Ejecutar el pipeline completo
-python run.py
+# Para otros sistemas operativos sigue esta guia
 
+# MACos
+git clone https://github.com/Skade2050/Proyecto_UT1_RA1_BigData
+cd Proyecto_UT1_RA1_BigData
+python3 -m pip install -r requirements.txt
+
+# Linuz
+sudo apt update
+sudo apt install -y python3 python3-pip git
+git clone https://github.com/Skade2050/Proyecto_UT1_RA1_BigData
+cd Proyecto_UT1_RA1_BigData
+python3 -m pip install -r requirements.txt
 
