@@ -9,7 +9,6 @@ EXPECTED_COLS = [
 ]
 
 def _leer_csv(path: str) -> pd.DataFrame:
-    """Lee CSV con detección simple de separador. Rechaza vacíos o con <2 columnas."""
     for sep in (";", ",", "\t", "|"):
         try:
             df = pd.read_csv(path, sep=sep)
@@ -21,7 +20,6 @@ def _leer_csv(path: str) -> pd.DataFrame:
     raise ValueError("No se pudo detectar separador o el CSV está vacío. Guarda el CSV con ';' o ','.")
 
 def _normalizar(df: pd.DataFrame) -> pd.DataFrame:
-    """Ajusta columnas, tipos y textos para el Excel del trabajo."""
     faltan = [c for c in EXPECTED_COLS if c not in df.columns]
     if faltan:
         raise ValueError(f"Faltan columnas obligatorias: {faltan}")
@@ -48,7 +46,6 @@ def _normalizar(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def _autosize(ws, df: pd.DataFrame):
-    """Auto-ajusta ancho de columnas (openpyxl)."""
     from openpyxl.utils import get_column_letter
     for i, col in enumerate(df.columns, start=1):
         texto = df[col].astype(str).head(1000)
@@ -56,7 +53,6 @@ def _autosize(ws, df: pd.DataFrame):
         ws.column_dimensions[get_column_letter(i)].width = min(ancho, 60)
 
 def _escribir_hojas(xlsx_path: str, df: pd.DataFrame):
-    """Crea 'Encuestas' y 'ResumenCalidad' con formato básico."""
     with pd.ExcelWriter(xlsx_path, engine="openpyxl") as w:
         # Hoja principal
         df.to_excel(w, sheet_name="Encuestas", index=False)
@@ -86,7 +82,6 @@ def _escribir_hojas(xlsx_path: str, df: pd.DataFrame):
         _autosize(wsq, q)
 
 def build_xlsx_from_csv(csv_path: str, xlsx_path: str | None = None) -> str:
-    """CSV → XLSX (Encuestas + ResumenCalidad). Devuelve ruta del XLSX."""
     src = Path(csv_path)
     if not src.is_file():
         raise FileNotFoundError(f"No existe el CSV: {csv_path}")
@@ -100,7 +95,6 @@ def build_xlsx_from_csv(csv_path: str, xlsx_path: str | None = None) -> str:
     return str(out)
 
 def build_xlsx_from_df(df: pd.DataFrame, xlsx_path: str) -> str:
-    """DataFrame → XLSX (mismo formato). Devuelve ruta del XLSX."""
     df = _normalizar(df.copy())
     out = Path(xlsx_path)
     out.parent.mkdir(parents=True, exist_ok=True)
