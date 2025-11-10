@@ -11,14 +11,7 @@ def generate_report(
     df_quarantine: pd.DataFrame,
     output_path: str = "project/output/reporte.md",
 ) -> None:
-    """
-    Genera un reporte en Markdown con lenguaje sencillo:
-      1) Resumen rápido (con números clave)
-      2) Qué significa cada número (definiciones)
-      3) Distribución de satisfacción (1–10 y NS/NC)
-      4) Evolución por mes (nº de encuestas y media)
-      5) Resumen de calidad (cuarentena)
-    """
+    
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
 
@@ -131,11 +124,6 @@ def export_quality_report(
     df_quarantine: pd.DataFrame,
     xlsx_path: str = "project/output/informe_de_calidad.xlsx",
 ) -> None:
-    """
-    Exporta un Excel con:
-      - Nulos por campo (sobre clean)
-      - Resumen de cuarentena por causa
-    """
     Path(xlsx_path).parent.mkdir(parents=True, exist_ok=True)
 
     # Nulos por campo (clean)
