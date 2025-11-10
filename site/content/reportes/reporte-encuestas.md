@@ -117,7 +117,7 @@ Los registros que no cumplen las reglas de calidad se guardan aparte con su moti
   - `clean_encuestas`: datos limpios.  
   - `quarantine_encuestas`: registros rechazados.  
 - **Excel (`project/output/informe_de_calidad.xlsx`)**: resumen de nulos y causas de cuarentena.  
-- **Markdown (`project/output/reporte.md`)**: este informe.  
+- **Markdown (`project/output/reporte.md`)**.  
 
 > Cada registro contiene campos de trazabilidad: `_source_file`, `_ingest_ts`, `_batch_id`.
 
